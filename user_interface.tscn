@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://egatg6vjqljd"]
+
+[ext_resource type="Theme" uid="uid://dpmqu4mlr45je" path="res://TextElement.tres" id="1_5j0em"]
+[ext_resource type="Script" path="res://user_interface.gd" id="1_inmly"]
+
+[node name="UserInterface" type="CanvasLayer"]
+script = ExtResource("1_inmly")
+
+[node name="Announcements" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.0
+offset_top = 30.0
+offset_right = 53.0
+offset_bottom = 53.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("1_5j0em")
+text = "Wave Cleared!
+"
+
+[node name="Gold" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -46.0
+offset_right = 85.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme = ExtResource("1_5j0em")
+text = "Gold: "
+
+[node name="TowerCost" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -77.0
+offset_right = 85.0
+offset_bottom = -51.0
+grow_vertical = 0
+theme = ExtResource("1_5j0em")
+text = "Next Tower:"
+
+[node name="WaveTip" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 80.0
+offset_right = 20.0
+offset_bottom = 103.0
+grow_horizontal = 2
+theme = ExtResource("1_5j0em")
+theme_override_font_sizes/font_size = 35
+text = "Drag over Castle to Continue"
+horizontal_alignment = 1
+
+[node name="TowerTip" type="Label" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -198.0
+offset_top = -70.0
+offset_right = 201.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_5j0em")
+text = "Place a tower with Ctrl + Drag"
+horizontal_alignment = 1

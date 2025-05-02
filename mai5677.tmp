@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvb8in1h02v20"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_mio2i"]
+[ext_resource type="PackedScene" uid="uid://de71nldtb20oa" path="res://castle.tscn" id="2_2gspt"]
+[ext_resource type="PackedScene" uid="uid://hn03evbi0q7a" path="res://enemy.tscn" id="2_pukxx"]
+[ext_resource type="PackedScene" uid="uid://ckyppuodvi3ix" path="res://targeting_system.tscn" id="3_mklhe"]
+
+[sub_resource type="Curve2D" id="Curve2D_jrhck"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -579, -325, 0, 0, 0, 0, 576, -324)
+}
+point_count = 2
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mio2i")
+mob_scene = ExtResource("2_pukxx")
+
+[node name="castle" parent="." instance=ExtResource("2_2gspt")]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jrhck")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-579, -325)
+rotation = 0.000865801
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="StartDelay" type="Timer" parent="."]
+
+[node name="TargetingSystem" parent="." instance=ExtResource("3_mklhe")]
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="StartDelay" to="." method="_on_start_delay_timeout"]

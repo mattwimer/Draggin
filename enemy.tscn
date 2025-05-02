@@ -1,0 +1,142 @@
+[gd_scene load_steps=19 format=3 uid="uid://hn03evbi0q7a"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_4qa4g"]
+[ext_resource type="Texture2D" uid="uid://du74gb4ohfxrm" path="res://Art/zombie-idle.png" id="2_u2m0i"]
+[ext_resource type="Texture2D" uid="uid://dj5mxx63xp0aw" path="res://Art/zombie-walk.png" id="3_no0os"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7acbq"]
+atlas = ExtResource("2_u2m0i")
+region = Rect2(12, 12, 30, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dcu2"]
+atlas = ExtResource("2_u2m0i")
+region = Rect2(60, 12, 30, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dape"]
+atlas = ExtResource("2_u2m0i")
+region = Rect2(108, 12, 30, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xfai"]
+atlas = ExtResource("2_u2m0i")
+region = Rect2(156, 12, 30, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj13f"]
+atlas = ExtResource("2_u2m0i")
+region = Rect2(204, 12, 30, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_colon"]
+atlas = ExtResource("2_u2m0i")
+region = Rect2(252, 12, 30, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbpu3"]
+atlas = ExtResource("2_u2m0i")
+region = Rect2(300, 12, 30, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_om2bt"]
+atlas = ExtResource("3_no0os")
+region = Rect2(12, 12, 33, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrn8j"]
+atlas = ExtResource("3_no0os")
+region = Rect2(60, 12, 33, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r4ux"]
+atlas = ExtResource("3_no0os")
+region = Rect2(108, 12, 33, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vouk7"]
+atlas = ExtResource("3_no0os")
+region = Rect2(156, 12, 33, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7n4qx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7acbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dcu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dape")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xfai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj13f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_colon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbpu3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_om2bt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrn8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r4ux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vouk7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5n73"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1x0h"]
+bg_color = Color(0.999825, 0.28759, 0.225499, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xiii7"]
+bg_color = Color(0, 0.643698, 3.85046e-07, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Enemy" type="RigidBody2D" groups=["enemies"]]
+position = Vector2(520, 326)
+collision_layer = 3
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_4qa4g")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7n4qx")
+animation = &"idle"
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b5n73")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2, 1)
+scale = Vector2(1.5, 1.7)
+
+[node name="HP" type="ProgressBar" parent="."]
+offset_left = -21.0
+offset_top = -40.0
+offset_right = 21.0
+offset_bottom = -20.0
+theme_override_styles/background = SubResource("StyleBoxFlat_h1x0h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xiii7")
+max_value = 3.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgfpnupow0rg1"]
+
+[ext_resource type="FontFile" uid="uid://cicw700oo5xyo" path="res://fonts/Firlest-Regular.otf" id="1_5dg55"]
+[ext_resource type="Script" path="res://title_screen.gd" id="1_74adb"]
+
+[node name="TitleScreen" type="CanvasLayer"]
+script = ExtResource("1_74adb")
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_top = 100.0
+offset_right = 210.0
+offset_bottom = 208.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_5dg55")
+theme_override_font_sizes/font_size = 128
+text = "DRAGGIN"
+
+[node name="PlayButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -35.0
+offset_right = 64.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_5dg55")
+theme_override_font_sizes/font_size = 48
+text = "PLAY"
+
+[node name="DifficultySelector" type="OptionButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.5
+offset_top = 76.0
+offset_right = 86.5
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_5dg55")
+theme_override_font_sizes/font_size = 48
+selected = 1
+item_count = 3
+popup/item_0/text = "Easy"
+popup/item_1/text = "Normal"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="item_selected" from="DifficultySelector" to="." method="_on_difficulty_selected"]

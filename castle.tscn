@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://de71nldtb20oa"]
+
+[ext_resource type="Texture2D" uid="uid://j1qmuvrge5gj" path="res://Art/Castle.png" id="1_mmjwm"]
+[ext_resource type="Script" path="res://castle.gd" id="1_pobyr"]
+[ext_resource type="Texture2D" uid="uid://dj7x4g63bfvso" path="res://Art/Magic Sphere.png" id="3_wstm0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5xdo"]
+size = Vector2(94, 50)
+
+[node name="castle" type="RigidBody2D"]
+visible = false
+gravity_scale = 0.0
+script = ExtResource("1_pobyr")
+oscillation_distance = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_u5xdo")
+
+[node name="CastlePicture" type="Sprite2D" parent="."]
+texture = ExtResource("1_mmjwm")
+
+[node name="MagicSource" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("3_wstm0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

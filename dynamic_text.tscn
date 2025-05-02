@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd13me2yw2b8v"]
+
+[ext_resource type="Theme" uid="uid://dpmqu4mlr45je" path="res://TextElement.tres" id="1_5mabv"]
+[ext_resource type="Script" path="res://dynamic_text.gd" id="1_w14lm"]
+
+[node name="DynamicText" type="Label"]
+offset_right = 40.0
+offset_bottom = 26.0
+theme = ExtResource("1_5mabv")
+script = ExtResource("1_w14lm")

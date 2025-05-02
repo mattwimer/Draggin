@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dpmqu4mlr45je"]
+
+[ext_resource type="FontFile" uid="uid://cicw700oo5xyo" path="res://fonts/Firlest-Regular.otf" id="1_vgni0"]
+
+[resource]
+default_font = ExtResource("1_vgni0")
+default_font_size = 30
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/shadow_outline_size = 4

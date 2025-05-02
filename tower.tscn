@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bckw72uyafdtr"]
+
+[ext_resource type="Texture2D" uid="uid://dj7x4g63bfvso" path="res://Art/Magic Sphere.png" id="1_ajuab"]
+[ext_resource type="Texture2D" uid="uid://fajwdys6xmq5" path="res://Art/Tower.png" id="1_fu275"]
+[ext_resource type="Script" path="res://tower.gd" id="1_jauqk"]
+[ext_resource type="Script" path="res://tower_range.gd" id="3_hgj73"]
+[ext_resource type="Texture2D" uid="uid://cdcpx3opvrkju" path="res://Art/circletexture.png" id="4_1yptg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i0uh2"]
+radius = 60.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oinx0"]
+size = Vector2(26, 20)
+
+[node name="tower" type="RigidBody2D"]
+position = Vector2(438, 245)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_jauqk")
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_hgj73")
+color = Color(0, 0, 1, 0.392157)
+
+[node name="Area" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_i0uh2")
+
+[node name="VisibleRange" type="Sprite2D" parent="Range"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource("4_1yptg")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oinx0")
+
+[node name="AttackPause" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+autostart = true
+
+[node name="MagicSource" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ajuab")
+
+[node name="Picture" type="Sprite2D" parent="."]
+texture = ExtResource("1_fu275")
