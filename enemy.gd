@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 @export var health = 3
+var target
 
 #TODO:
 #Enemies that jump around when damaged
@@ -12,12 +13,23 @@ func _ready() -> void:
 	$AnimatedSprite.play("walk")
 	$HP.max_value = health
 	$HP.value = health
+	#self.linear_velocity *= 2
 
 signal died(gold: int)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func place(pos: Vector2):
+	self.position = pos
+
+func aim(pos: Vector2, min_speed:int = 75, max_speed:int = 125):
+	target = pos
+	var direction = (self.position.direction_to(pos)).angle()
+	var velocity = Vector2(randf_range(min_speed, max_speed), 0.0)
+
+	self.linear_velocity = velocity.rotated(direction)
 
 func targeted(rect: Rect2):
 	if rect.has_point(global_position):

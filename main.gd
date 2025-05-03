@@ -1,6 +1,6 @@
 extends Node
 
-@export var mob_scene: PackedScene
+@export var mob_manager: PackedScene
 @export var tower_scene: PackedScene
 @export var text_maker: PackedScene
 @onready var s_box: Control = $TargetingSystem
@@ -50,36 +50,28 @@ func _on_mob_timer_timeout() -> void:
 	#print("Castle is at: ", $castle.global_position)
 	#print("Mouse is at: ", get_viewport().get_mouse_position())
 	# Create a new instance of the Mob scene.
-	var mob = mob_scene.instantiate()
+	var mob = mob_manager.instantiate()
 	
-	# Choose a random location on Path2D.
 	var mob_spawn_location = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
-	mob.position = mob_spawn_location.position
-	mob.position.x -= screen.size.x/2
-	if mob.position.x > 0:
+	#mob.position = mob_spawn_location.position
+	mob_spawn_location.position.x -= screen.size.x/2
+	if mob_spawn_location.position.x > 0:
 		mob.flip()
-	mob.position.y -= screen.size.y/2
-	#print("I think I'm at: ", mob.position)
-	#print("Mouse is at: ", get_viewport().get_mouse_position())
+	mob_spawn_location.position.y -= screen.size.y/2
+	mob.place(mob_spawn_location.position)
 	mob.health = 2 + difficulty
+	mob.aim(Vector2.ZERO)
 	
-	
-	#var direction = mob_spawn_location.position.direction_to($castle.global_position).angle()
-	var direction = (mob_spawn_location.global_position.direction_to($castle.global_position)).angle()
-	#mob.rotation = direction
-	var velocity = Vector2(randf_range(75.0, 125.0), 0.0)
-	#var velocity = Vector2.ZERO
-	mob.linear_velocity = velocity.rotated(direction)
+	#var direction = (mob.position.direction_to($castle.global_position)).angle()
+	#var velocity = Vector2(randf_range(75.0, 125.0), 0.0)
+	#mob.linear_velocity = velocity.rotated(direction)
 	add_child(mob)
 	move_child(s_box,-1)
 	mob.died.connect(_on_gold_change)
 	
 func _on_gold_change(gold: int):
 	$UserInterface.change_gold(gold)
-
-func _on_targeting_system_pause() -> void:
-	pass # Replace with function body.
 
 func _on_targeting_system_selection_made(rect: Rect2, mod: String) -> void:
 	#print(get_tree().get_nodes_in_group("enemies"))

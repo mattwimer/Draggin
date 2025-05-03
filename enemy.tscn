@@ -111,7 +111,6 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [node name="Enemy" type="RigidBody2D" groups=["enemies"]]
-position = Vector2(520, 326)
 collision_layer = 3
 collision_mask = 0
 gravity_scale = 0.0
@@ -119,7 +118,7 @@ script = ExtResource("1_4qa4g")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7n4qx")
-animation = &"idle"
+animation = &"walk"
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b5n73")

@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsedvcytuqqnc"]
+
+[ext_resource type="PackedScene" uid="uid://hn03evbi0q7a" path="res://enemy.tscn" id="1_rh1p7"]
+[ext_resource type="Texture2D" uid="uid://mlh33di2d1r0" path="res://Art/Samurai.png" id="2_7ipd1"]
+[ext_resource type="Script" path="res://paired_enemies.gd" id="2_78hf1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ngf"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(1, 71, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeb6x"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(49, 71, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nx8y"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(97, 71, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs14s"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(145, 71, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhqos"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(193, 71, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt6b1"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(241, 71, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8rah"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(289, 71, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l5fv"]
+atlas = ExtResource("2_7ipd1")
+region = Rect2(337, 71, 27, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ioiky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ngf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeb6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nx8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gs14s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhqos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt6b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8rah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2l5fv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[node name="PairedEnemies" instance=ExtResource("1_rh1p7")]
+script = ExtResource("2_78hf1")
+health = null
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ioiky")
