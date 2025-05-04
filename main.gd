@@ -33,7 +33,7 @@ func _new_game() -> void:
 	$castle.visible = true
 	$TitleScreen.hide()
 	$WaveDelay.start()
-	wave_number = 1
+	wave_number = 0
 	difficulty = $TitleScreen/DifficultySelector.selected #0:Easy/1:Normal/2:Hard
 	mom.set_difficulty(difficulty)
 	

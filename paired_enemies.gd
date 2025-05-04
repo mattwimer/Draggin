@@ -20,7 +20,7 @@ func assign_partner(pal:Enemy):
 	
  
 func targeted(rect: Rect2):
-	var pair_condition = !rect.has_point(partner.global_position) if is_instance_valid(self.partner) else true
+	var pair_condition = (!rect.has_point(partner.global_position) || partner.position.distance_to(position) < 20) if is_instance_valid(self.partner) else true
 	if rect.has_point(global_position) and pair_condition:
 		$HP.value -= 1
 		if $HP.value <= 0:

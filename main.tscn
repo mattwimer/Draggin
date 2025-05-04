@@ -84,7 +84,7 @@ rotation = 0.000865801
 one_shot = true
 
 [node name="WaveTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 15.0
 one_shot = true
 
 [node name="RestartTimer" type="Timer" parent="."]
