@@ -14,7 +14,7 @@ size = Vector2(26, 20)
 
 [node name="tower" type="RigidBody2D" groups=["towers"]]
 position = Vector2(438, 245)
-collision_layer = 0
+collision_layer = 8
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_jauqk")

@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if $AttackPause.is_stopped(): #Ready to fire
 		if $Range.has_overlapping_bodies():
 			var targets = $Range.get_overlapping_bodies()

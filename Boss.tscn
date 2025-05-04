@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdngjnk8voqgo"]
+[gd_scene load_steps=7 format=3 uid="uid://bdngjnk8voqgo"]
 
 [ext_resource type="PackedScene" uid="uid://hn03evbi0q7a" path="res://enemy.tscn" id="1_l6sy0"]
 [ext_resource type="Script" path="res://boss.gd" id="2_ir6jb"]
 [ext_resource type="Texture2D" uid="uid://dfsnxyhyl76l1" path="res://Art/zeus.png" id="3_mu0c3"]
+[ext_resource type="PackedScene" uid="uid://y113qxd761xl" path="res://lightning_bolt.tscn" id="3_xjiki"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4cfk"]
 
-[node name="Enemy" instance=ExtResource("1_l6sy0")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_duqmn"]
+size = Vector2(138, 150)
+
+[node name="Boss" instance=ExtResource("1_l6sy0")]
+collision_layer = 2
 script = ExtResource("2_ir6jb")
+lightning = ExtResource("3_xjiki")
 float_distance = 30.0
 float_speed = 1.0
 
@@ -21,3 +27,15 @@ texture = ExtResource("3_mu0c3")
 
 [node name="HP" parent="." index="4"]
 visible = false
+
+[node name="DestructionZone" type="Area2D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestructionZone" index="0"]
+shape = SubResource("RectangleShape2D_duqmn")
+
+[node name="ZapTimer" type="Timer" parent="." index="6"]
+wait_time = 8.0
+
+[connection signal="timeout" from="ZapTimer" to="." method="_on_zap_timer_timeout"]

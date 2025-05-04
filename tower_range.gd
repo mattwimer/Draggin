@@ -10,5 +10,5 @@ func _ready():
 	$VisibleRange.scale = Vector2.ONE * (($Area.shape.radius * 2.0) / texture_size.x)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$VisibleRange.modulate = color

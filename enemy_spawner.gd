@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func set_difficulty(hardness:int):
@@ -20,7 +20,7 @@ func set_difficulty(hardness:int):
 #TODO: above 100% spawn chance for higher wave amounts
 func spawn_enemy(wave: int, pos:Vector2, target:Vector2):
 	var chance = randi_range(1,100)
-	if chance < (wave-1) * 8:
+	if chance < mini(5, (wave-1)) * 8:
 		chance = randi_range(1,3)
 		if chance == 1:
 			return spawn_pair(pos, target)

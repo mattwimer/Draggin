@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvb8in1h02v20"]
+[gd_scene load_steps=14 format=3 uid="uid://bvb8in1h02v20"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_mio2i"]
 [ext_resource type="PackedScene" uid="uid://de71nldtb20oa" path="res://castle.tscn" id="2_2gspt"]
@@ -9,12 +9,27 @@
 [ext_resource type="PackedScene" uid="uid://dgfpnupow0rg1" path="res://title_screen.tscn" id="5_0nqn5"]
 [ext_resource type="Texture2D" uid="uid://jbv5l1egk7lc" path="res://Art/grass background.png" id="5_tqvdw"]
 [ext_resource type="PackedScene" uid="uid://egatg6vjqljd" path="res://user_interface.tscn" id="7_6om1d"]
+[ext_resource type="PackedScene" uid="uid://bdngjnk8voqgo" path="res://Boss.tscn" id="10_k3s0u"]
 
 [sub_resource type="Curve2D" id="Curve2D_jrhck"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -579, -325, 0, 0, 0, 0, 576, -324)
 }
 point_count = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2l1b"]
+bg_color = Color(1, 0.286275, 0.227451, 0.647059)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wk34f"]
+bg_color = Color(0, 0.643137, 0, 0.647059)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -29,6 +44,7 @@ script = ExtResource("1_mio2i")
 mob_manager = ExtResource("2_gxwq0")
 tower_scene = ExtResource("3_g3uyl")
 text_maker = ExtResource("4_cwv1n")
+boss_mob = ExtResource("10_k3s0u")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.597176, 0.597176, 0.597176, 1)
@@ -71,19 +87,40 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [node name="TitleScreen" parent="." instance=ExtResource("5_0nqn5")]
 
 [node name="UserInterface" parent="." instance=ExtResource("7_6om1d")]
 
 [node name="TargetingSystem" parent="." instance=ExtResource("3_mklhe")]
 process_mode = 3
+z_index = 101
 layout_mode = 1
 offset_left = -1000.0
 offset_right = -2152.0
 offset_bottom = -648.0
 
+[node name="BossBar" type="ProgressBar" parent="."]
+visible = false
+visibility_layer = 32
+z_index = 100
+layout_mode = 0
+offset_left = -243.0
+offset_top = 283.0
+offset_right = 249.0
+offset_bottom = 310.0
+theme_override_styles/background = SubResource("StyleBoxFlat_v2l1b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wk34f")
+value = 30.0
+show_percentage = false
+
+[connection signal="hit" from="castle" to="." method="castle_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="WaveDelay" to="." method="_on_start_delay_timeout"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="RestartTimer" to="." method="game_over"]
 [connection signal="start_game" from="TitleScreen" to="." method="_new_game"]
 [connection signal="selection_made" from="TargetingSystem" to="." method="_on_targeting_system_selection_made"]

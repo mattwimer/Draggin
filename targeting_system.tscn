@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckyppuodvi3ix"]
+[gd_scene load_steps=3 format=3 uid="uid://ckyppuodvi3ix"]
 
 [ext_resource type="Script" path="res://targeting_system.gd" id="1_5ehhq"]
-[ext_resource type="Texture2D" uid="uid://fajwdys6xmq5" path="res://Art/Tower.png" id="2_au0oa"]
 [ext_resource type="PackedScene" uid="uid://bckw72uyafdtr" path="res://tower.tscn" id="2_s5gvf"]
 
 [node name="TargetingSystem" type="Control"]
@@ -16,11 +15,6 @@ script = ExtResource("1_5ehhq")
 [node name="TowerHover" parent="." instance=ExtResource("2_s5gvf")]
 process_mode = 4
 visible = false
-
-[node name="old" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(15, 10)
-texture = ExtResource("2_au0oa")
 
 [node name="SelectionBox" type="ColorRect" parent="."]
 visible = false

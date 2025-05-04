@@ -11,6 +11,7 @@ var paused = false
 func _ready() -> void:
 	screen = get_viewport()
 	global_position = Vector2(0,0)
+	$TowerHover.remove_from_group("towers")
 	
 
 
@@ -46,11 +47,12 @@ func _input(event: InputEvent) -> void:
 					selection_made.emit(rect, "SHIFT")  # Emit the selected area
 				s_box.visible = false
 				$TowerHover.visible = false
+				
 			
 	if event is InputEventMouseMotion and s_box.visible:
 		var mouse_pos = screen.get_mouse_position()
-		var size = mouse_pos - drag_origin
+		var sz = mouse_pos - drag_origin
 		s_box.global_position = Vector2(min(drag_origin.x, mouse_pos.x), min(drag_origin.y, mouse_pos.y))
-		s_box.size = abs(size)
+		s_box.size = abs(sz)
 		$TowerHover.visible = Input.is_action_pressed("ctrl")
 		$TowerHover.position = Rect2(s_box.global_position,s_box.size).get_center()

@@ -9,8 +9,8 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func aim(pos: Vector2, min_speed:int = 75, max_speed:int = 125):
+func aim(pos: Vector2, _min_speed:int = 75, _max_speed:int = 125):
 	super.aim(pos, 125, 150)
