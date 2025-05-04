@@ -15,3 +15,4 @@ func show_value(text: String, travel: Vector2, duration):
 	var tween = create_tween()
 	tween.tween_property(self, "position", position + travel, duration)
 	tween.parallel().tween_property(self, "modulate:a8", 0, duration)
+	tween.tween_callback(queue_free)

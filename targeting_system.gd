@@ -26,7 +26,8 @@ func pause():
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		pause()
-		#pause.emit()
+	if Input.is_action_just_pressed("continue") and paused:
+		get_tree().quit()
 	
 	if event is InputEventMouseButton and not paused:
 		if event.button_index == MOUSE_BUTTON_LEFT:

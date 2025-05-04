@@ -70,7 +70,6 @@ animations = [{
 
 [node name="PairedEnemies" instance=ExtResource("1_rh1p7")]
 script = ExtResource("2_78hf1")
-health = null
 
 [node name="AnimatedSprite" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_ioiky")

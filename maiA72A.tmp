@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bvb8in1h02v20"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_mio2i"]
+[ext_resource type="PackedScene" uid="uid://cs0j1mow7skwu" path="res://enemy_spawner.tscn" id="2_1i8a3"]
 [ext_resource type="PackedScene" uid="uid://de71nldtb20oa" path="res://castle.tscn" id="2_2gspt"]
-[ext_resource type="PackedScene" uid="uid://cs0j1mow7skwu" path="res://enemy_spawner.tscn" id="2_gxwq0"]
 [ext_resource type="PackedScene" uid="uid://bckw72uyafdtr" path="res://tower.tscn" id="3_g3uyl"]
 [ext_resource type="PackedScene" uid="uid://ckyppuodvi3ix" path="res://targeting_system.tscn" id="3_mklhe"]
 [ext_resource type="PackedScene" uid="uid://dd13me2yw2b8v" path="res://dynamic_text.tscn" id="4_cwv1n"]
@@ -26,9 +26,10 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mio2i")
-mob_manager = ExtResource("2_gxwq0")
+mob_manager = ExtResource("2_1i8a3")
 tower_scene = ExtResource("3_g3uyl")
 text_maker = ExtResource("4_cwv1n")
+metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.597176, 0.597176, 0.597176, 1)
@@ -54,6 +55,8 @@ texture = ExtResource("5_tqvdw")
 [node name="castle" parent="." instance=ExtResource("2_2gspt")]
 
 [node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="MobPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_jrhck")

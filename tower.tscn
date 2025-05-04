@@ -12,7 +12,7 @@ radius = 60.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oinx0"]
 size = Vector2(26, 20)
 
-[node name="tower" type="RigidBody2D"]
+[node name="tower" type="RigidBody2D" groups=["towers"]]
 position = Vector2(438, 245)
 collision_layer = 0
 collision_mask = 0

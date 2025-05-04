@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://cs0j1mow7skwu"]
+
+[ext_resource type="Script" path="res://enemy_spawner.gd" id="1_ob62x"]
+[ext_resource type="PackedScene" uid="uid://hn03evbi0q7a" path="res://enemy.tscn" id="2_ewpv2"]
+[ext_resource type="PackedScene" uid="uid://dsedvcytuqqnc" path="res://paired_enemies.tscn" id="3_avsfc"]
+[ext_resource type="PackedScene" uid="uid://dcry0bvroi3wd" path="res://brute.tscn" id="4_sbdmm"]
+[ext_resource type="PackedScene" uid="uid://bt02csr68c7it" path="res://Cluster.tscn" id="4_wie52"]
+
+[node name="Spawner" type="Node"]
+script = ExtResource("1_ob62x")
+basic = ExtResource("2_ewpv2")
+pair = ExtResource("3_avsfc")
+cluster = ExtResource("4_wie52")
+brute = ExtResource("4_sbdmm")

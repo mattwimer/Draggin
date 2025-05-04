@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://bt02csr68c7it"]
+
+[ext_resource type="PackedScene" uid="uid://hn03evbi0q7a" path="res://enemy.tscn" id="1_x4jw7"]
+[ext_resource type="Texture2D" uid="uid://crmm3gwqybehy" path="res://Art/SimpleEnemies Bat_Idle Spritesheet.png" id="2_5fsnp"]
+[ext_resource type="Script" path="res://cluster.gd" id="2_dl7sq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60k8b"]
+atlas = ExtResource("2_5fsnp")
+region = Rect2(7, 9, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_132cl"]
+atlas = ExtResource("2_5fsnp")
+region = Rect2(39, 9, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5ss0"]
+atlas = ExtResource("2_5fsnp")
+region = Rect2(71, 9, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_butoh"]
+atlas = ExtResource("2_5fsnp")
+region = Rect2(103, 9, 17, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55qqn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60k8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_132cl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5ss0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_butoh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Cluster" instance=ExtResource("1_x4jw7")]
+script = ExtResource("2_dl7sq")
+
+[node name="AnimatedSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_55qqn")
+frame_progress = 0.550981
+
+[node name="HP" parent="." index="3"]
+offset_left = -9.0
+offset_top = -21.0
+offset_right = 9.0
+offset_bottom = -13.0

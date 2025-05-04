@@ -1,7 +1,8 @@
+class_name Enemy
 extends RigidBody2D
-
 @export var health = 3
 var target
+var gold_value
 
 #TODO:
 #Enemies that jump around when damaged
@@ -13,6 +14,7 @@ func _ready() -> void:
 	$AnimatedSprite.play("walk")
 	$HP.max_value = health
 	$HP.value = health
+	gold_value = health
 	#self.linear_velocity *= 2
 
 signal died(gold: int)
@@ -34,14 +36,16 @@ func aim(pos: Vector2, min_speed:int = 75, max_speed:int = 125):
 func targeted(rect: Rect2):
 	if rect.has_point(global_position):
 		$HP.value -= 1
+		health -= 1
 		if $HP.value <= 0:
-			died.emit($HP.max_value)
+			died.emit(gold_value)
 			queue_free()
 			
 func damage(amount: int):
 	$HP.value -= amount
+	health -= amount
 	if $HP.value <= 0:
-			died.emit($HP.max_value)
+			died.emit(gold_value)
 			queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:

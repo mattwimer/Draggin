@@ -7,7 +7,7 @@ extends Node
 var screen
 var difficulty
 var wave_number
-
+var mom
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,12 +17,15 @@ func _ready() -> void:
 	wave_number = 0
 	# Create Mob Spawn Path based on screen size
 	var curve = $MobPath.get_curve()
+	#$Boss.place(Vector2(screen.size.x/2 - 200, -screen.size.y/2 + 200))
+	#$Boss.start_float()
 	curve.clear_points()
 	curve.add_point(Vector2(0,0))
 	curve.add_point(Vector2(screen.size.x,0))
 	curve.add_point(Vector2(screen.size.x,screen.size.y))
 	curve.add_point(Vector2(0,screen.size.y))
 	curve.add_point(Vector2(0,0))
+	mom = mob_manager.instantiate()
 
 
 func _new_game() -> void:
@@ -31,10 +34,22 @@ func _new_game() -> void:
 	$WaveDelay.start()
 	wave_number = 1
 	difficulty = $TitleScreen/DifficultySelector.selected #0:Easy/1:Normal/2:Hard
+	mom.set_difficulty(difficulty)
+	
+func game_over() -> void:
+	$TitleScreen.show()
+	$WaveDelay.stop()
+	$WaveTimer.stop()
+	$MobTimer.stop()
+	var tree = get_tree()
+	for enemy in tree.get_nodes_in_group("enemies"):
+		enemy.queue_free()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	#print($Boss.health)
 	#print(get_viewport().get_mouse_position())
 
 func _on_start_delay_timeout() -> void:
@@ -50,25 +65,28 @@ func _on_mob_timer_timeout() -> void:
 	#print("Castle is at: ", $castle.global_position)
 	#print("Mouse is at: ", get_viewport().get_mouse_position())
 	# Create a new instance of the Mob scene.
-	var mob = mob_manager.instantiate()
+	#var mom = mob_manager.instantiate()
 	
 	var mob_spawn_location = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
 	#mob.position = mob_spawn_location.position
 	mob_spawn_location.position.x -= screen.size.x/2
-	if mob_spawn_location.position.x > 0:
-		mob.flip()
 	mob_spawn_location.position.y -= screen.size.y/2
-	mob.place(mob_spawn_location.position)
-	mob.health = 2 + difficulty
-	mob.aim(Vector2.ZERO)
+		#mob.health = 2 + difficulty
+	#mob.place(mob_spawn_location.position)
+	#mob.aim(Vector2.ZERO)
+	var mobs = mom.spawn_enemy(wave_number, mob_spawn_location.position, Vector2.ZERO)
 	
+	for mob in mobs:
+		if mob.position.x > 0:
+			mob.flip()
+		add_child(mob)
+		move_child(s_box,-1)
+		mob.died.connect(_on_gold_change)
+		
 	#var direction = (mob.position.direction_to($castle.global_position)).angle()
 	#var velocity = Vector2(randf_range(75.0, 125.0), 0.0)
 	#mob.linear_velocity = velocity.rotated(direction)
-	add_child(mob)
-	move_child(s_box,-1)
-	mob.died.connect(_on_gold_change)
 	
 func _on_gold_change(gold: int):
 	$UserInterface.change_gold(gold)
